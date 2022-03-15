@@ -10,9 +10,13 @@ public class Libretto {
 		voti = new ArrayList <Voto> ();
 	}
 	
-	public void add(Voto voto) {
-		this.voti.add(voto);
-		// il metodo fa lo stesso lavoro della List, però in questo caso si delega all'oggetto meno intelligente
+	public boolean add(Voto voto) {
+// il metodo fa lo stesso lavoro della List, però in questo caso si delega all'oggetto meno intelligente
+		if(!isDuplicato(voto) & !isConflitto(voto)) {
+			this.voti.add(voto);
+			return true;
+		} else
+			return false;
 	}
 	
 	public Libretto filtraPunti(int punteggio) {
@@ -57,6 +61,36 @@ public class Libretto {
 			return true;
 		
 		return false;
+	}
+	
+	public List<Voto> getVoti() {
+		return this.voti;
+	}
+	
+	public Libretto votiMigliorati() {
+		Libretto nuovo = new Libretto();
+		for(Voto v : this.voti) {
+			int p = v.getPunti();
+			if(p>=24)
+				p=p+2;
+			else
+				p++;
+			if(p>30)
+				p = 30;
+			nuovo.add(new Voto(v.getNomeCorso(), p));
+		}
+		return nuovo;
+	}
+	
+	/**
+	 * Cancella i voti inferiori al parametro passato
+	 * @param votoSoglia
+	 */
+	public void cancellaVotiMinori(int punti) {
+		for(Voto v : this.voti) {
+			if(v.getPunti()<punti)
+				this.voti.remove(v);
+		}
 	}
 	
 	@Override
