@@ -1,40 +1,39 @@
 package it.polito.tdp.librettovoti.model;
 
 public class Voto {
+	private String nome ;
+	private int punti ;
 	
-	private String nomeCorso;
-	private int punteggio;
-	
-	public Voto(String nomeCorso, int punti) {
-		this.nomeCorso = nomeCorso;
-		this.punteggio = punti;
+	public Voto(String nome, int punti) {
+		super();
+		this.nome = nome;
+		this.punti = punti;
 	}
-
-	public String getNomeCorso() {
-		return nomeCorso;
+	public String getNome() {
+		return nome;
 	}
-
-	public void setNomeCorso(String nomeCorso) {
-		this.nomeCorso = nomeCorso;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
 	public int getPunti() {
-		return punteggio;
+		return punti;
 	}
-
 	public void setPunti(int punti) {
-		this.punteggio = punti;
+		this.punti = punti;
 	}
 	
+	@Override
+	public String toString() {
+		return nome+" : "+ punti;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nomeCorso == null) ? 0 : nomeCorso.hashCode());
-		result = prime * result + punteggio;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + punti;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -44,21 +43,17 @@ public class Voto {
 		if (getClass() != obj.getClass())
 			return false;
 		Voto other = (Voto) obj;
-		if (nomeCorso == null) {
-			if (other.nomeCorso != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!nomeCorso.equals(other.nomeCorso))
+		} else if (!nome.equals(other.nome))
 			return false;
-		if (punteggio != other.punteggio)
+		if (punti != other.punti)
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return  nomeCorso + ": " + punteggio;
-	}
 	
 	
 	
+		
 }

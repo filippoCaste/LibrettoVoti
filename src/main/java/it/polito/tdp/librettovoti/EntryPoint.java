@@ -13,21 +13,17 @@ public class EntryPoint extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-    	// invece di usare un metodo STATIC viene definita una variabile così da avere un oggetto Loader
-    	// -- si ottiene un metodo .getController() che restituisce il riferimento alla classe controller.
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml")) ;
+        Parent root = loader.load() ;
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
-        Parent root = loader.load();
+        FXMLController controller = loader.getController();
         
-        /* *** MVC : Model View Controller *** */
         
-/**/        FXMLController controller = loader.getController(); 
-        
-/**/        Scene scene = new Scene(root);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         
-/**/        Libretto model = new Libretto(); // servirà al controller per chiamare i metodi di Libretto
-        controller.setModel(model);
+        Libretto model = new Libretto();
+        controller.setModel(model) ;
         
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
